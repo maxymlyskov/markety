@@ -4,12 +4,14 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import Login from "./pages/dashboard/Login";
 import Signup from "./pages/dashboard/Signup";
 import Project from "./pages/dashboard/Project";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <div className="container">
+          <Navbar />
           <Switch>
             <Route exact path="/">
               <Dashboard />
