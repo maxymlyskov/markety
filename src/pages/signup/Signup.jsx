@@ -76,7 +76,9 @@ export default function Signup() {
         {thumbnailError && <div className="error">{thumbnailError}</div>}
       </label>
       {isPending ? (
-        <button className="btn">Loading</button>
+        <button className="btn" disabled>
+          Loading...
+        </button>
       ) : (
         <button className="btn">Sign up</button>
       )}
