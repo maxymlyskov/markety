@@ -11,34 +11,29 @@ let initialState = {
 const firestoreReducer = (state, action) => {
   switch (action.type) {
     case "IS_PENDING":
-      return { success: false, isPending: true, error: null, document: null };
-    case "ERROR":
-      return {
-        success: false,
-        isPending: false,
-        error: action.payload,
-        document: null,
-      };
+      return { isPending: true, document: null, success: false, error: null };
     case "ADDED_DOCUMENT":
       return {
-        success: true,
         isPending: false,
-        error: null,
         document: action.payload,
-      };
-    case "DELTED_DOCUMENT":
-      return {
         success: true,
-        isPending: false,
         error: null,
+      };
+    case "DELETED_DOCUMENT":
+      return { isPending: false, document: null, success: true, error: null };
+    case "ERROR":
+      return {
+        isPending: false,
         document: null,
+        success: false,
+        error: action.payload,
       };
     case "UPDATED_DOCUMENT":
       return {
-        success: true,
         isPending: false,
-        error: null,
         document: action.payload,
+        success: true,
+        error: null,
       };
     default:
       return state;
@@ -81,26 +76,25 @@ export const useFirestore = (collection) => {
 
     try {
       await ref.doc(id).delete();
-      dispatchIfNotCancelled({
-        type: "DELTED_DOCUMENT",
-      });
+      dispatchIfNotCancelled({ type: "DELETED_DOCUMENT" });
     } catch (err) {
-      dispatchIfNotCancelled({ type: "ERROR", payload: err.message });
+      dispatchIfNotCancelled({ type: "ERROR", payload: "could not delete" });
     }
   };
+
   // update a document
   const updateDocument = async (id, updates) => {
     dispatch({ type: "IS_PENDING" });
 
     try {
-      const updatedDoucment = await ref.doc(id).update(updates);
+      const updatedDocument = await ref.doc(id).update(updates);
       dispatchIfNotCancelled({
         type: "UPDATED_DOCUMENT",
-        payload: updatedDoucment,
+        payload: updatedDocument,
       });
-      return updatedDoucment;
-    } catch (err) {
-      dispatchIfNotCancelled({ type: "ERROR", payload: err.message });
+      return updatedDocument;
+    } catch (error) {
+      dispatchIfNotCancelled({ type: "ERROR", payload: error });
       return null;
     }
   };
