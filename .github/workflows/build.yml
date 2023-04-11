@@ -13,6 +13,6 @@ jobs:
       - name: Install dependencies
         run: npm i
       - name: Build project
-        run: npm build
+        run: npm run build
       - name: Deploy
         run: echo "Builded"
