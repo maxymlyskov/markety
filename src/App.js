@@ -5,11 +5,13 @@ import Login from "./pages/dashboard/Login";
 import Signup from "./pages/dashboard/Signup";
 import Project from "./pages/dashboard/Project";
 import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <Sidebar />
         <div className="container">
           <Navbar />
           <Switch>
