@@ -12,8 +12,8 @@ export default function Navbar() {
     <nav className="navbar">
       <ul>
         <li className="logo">
-          <img src={Temple} alt="dojo logo" />
-          <span>The Dojo</span>
+          <img src={Temple} alt="v logo" />
+          <span>Markety</span>
         </li>
 
         <li>
